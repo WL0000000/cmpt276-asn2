@@ -6,6 +6,8 @@ target/
 .cursorrules
 .cursor/rules/
 CLAUDE.md
+roadmap.md
+
 
 ### STS ###
 .apt_generated
