@@ -2,6 +2,7 @@ package com.example.staffratings.controller;
 
 import com.example.staffratings.enums.RoleType;
 import com.example.staffratings.model.StaffRating;
+import com.example.staffratings.profile.StaffMemberProfileFactory;
 import com.example.staffratings.repository.StaffRatingRepository;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -55,6 +56,7 @@ public class StaffRatingController {
         StaffRating rating = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid staff rating id: " + id));
         model.addAttribute("staffRating", rating);
+        model.addAttribute("displayTitle", StaffMemberProfileFactory.from(rating).displayTitle());
         return "detail";
     }
 
