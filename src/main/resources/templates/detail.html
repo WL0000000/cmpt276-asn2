@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${staffRating.name} + ' — Staff Rating'">Staff Rating</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <h1><a th:href="@{/}">Staff Ratings</a></h1>
+        <a class="btn btn-secondary" th:href="@{/}">&larr; Back to list</a>
+    </header>
+
+    <div class="card">
+        <h2 th:text="${staffRating.name}">Name</h2>
+
+        <dl class="detail-grid">
+            <dt>Role</dt>
+            <dd><span class="badge" th:text="${staffRating.roleType}">ROLE</span></dd>
+
+            <dt>Email</dt>
+            <dd th:text="${staffRating.email}">email</dd>
+
+            <dt>Clarity</dt>
+            <dd th:text="${staffRating.clarity} + ' / 10'">0 / 10</dd>
+
+            <dt>Niceness</dt>
+            <dd th:text="${staffRating.niceness} + ' / 10'">0 / 10</dd>
+
+            <dt>Knowledgeable</dt>
+            <dd th:text="${staffRating.knowledgeableScore} + ' / 10'">0 / 10</dd>
+
+            <dt>Overall</dt>
+            <dd class="score" th:text="${#numbers.formatDecimal(staffRating.overallScore, 1, 1)}">0.0</dd>
+
+            <dt th:if="${staffRating.comment != null and !staffRating.comment.isBlank()}">Comment</dt>
+            <dd th:if="${staffRating.comment != null and !staffRating.comment.isBlank()}" th:text="${staffRating.comment}">comment</dd>
+
+            <dt>Created</dt>
+            <dd th:text="${#temporals.format(staffRating.createdAt, 'yyyy-MM-dd HH:mm')}">date</dd>
+
+            <dt>Updated</dt>
+            <dd th:text="${#temporals.format(staffRating.updatedAt, 'yyyy-MM-dd HH:mm')}">date</dd>
+        </dl>
+
+        <div class="detail-actions">
+            <a class="btn btn-primary" th:href="@{/staff/{id}/edit(id=${staffRating.id})}">Edit</a>
+            <form th:action="@{/staff/{id}/delete(id=${staffRating.id})}" method="post"
+                  onsubmit="return confirm('Delete this rating? This cannot be undone.');">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

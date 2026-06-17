@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Ratings</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <h1><a th:href="@{/}">Staff Ratings</a></h1>
+        <a class="btn btn-primary" th:href="@{/staff/new}">+ New Rating</a>
+    </header>
+
+    <div th:if="${#lists.isEmpty(ratings)}" class="empty-state card">
+        <p>No ratings yet.</p>
+        <a class="btn btn-primary" th:href="@{/staff/new}">Add the first one</a>
+    </div>
+
+    <table th:unless="${#lists.isEmpty(ratings)}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Overall</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rating : ${ratings}">
+            <td th:text="${rating.name}">Name</td>
+            <td><span class="badge" th:text="${rating.roleType}">ROLE</span></td>
+            <td class="score" th:text="${#numbers.formatDecimal(rating.overallScore, 1, 1)}">0.0</td>
+            <td>
+                <a th:href="@{/staff/{id}(id=${rating.id})}">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

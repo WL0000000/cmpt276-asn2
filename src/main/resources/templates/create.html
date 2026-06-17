@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Staff Rating</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <h1><a th:href="@{/}">Staff Ratings</a></h1>
+        <a class="btn btn-secondary" th:href="@{/}">&larr; Back to list</a>
+    </header>
+
+    <div class="card">
+        <h2>New Rating</h2>
+
+        <form th:action="@{/staff}" th:object="${staffRating}" method="post">
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" th:field="*{name}"
+                       th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}"
+                       th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+            </div>
+
+            <div class="field">
+                <label for="roleType">Role</label>
+                <select id="roleType" th:field="*{roleType}"
+                        th:classappend="${#fields.hasErrors('roleType')} ? 'is-invalid'">
+                    <option value="" th:selected="*{roleType == null}">-- Select a role --</option>
+                    <option th:each="rt : ${roleTypes}" th:value="${rt}" th:text="${rt}">ROLE</option>
+                </select>
+                <div class="error" th:if="${#fields.hasErrors('roleType')}" th:errors="*{roleType}">Role error</div>
+            </div>
+
+            <div class="scores-grid">
+                <div class="field">
+                    <label for="clarity">Clarity (1–10)</label>
+                    <input type="number" id="clarity" min="1" max="10" th:field="*{clarity}"
+                           th:classappend="${#fields.hasErrors('clarity')} ? 'is-invalid'">
+                    <div class="error" th:if="${#fields.hasErrors('clarity')}" th:errors="*{clarity}">Clarity error</div>
+                </div>
+
+                <div class="field">
+                    <label for="niceness">Niceness (1–10)</label>
+                    <input type="number" id="niceness" min="1" max="10" th:field="*{niceness}"
+                           th:classappend="${#fields.hasErrors('niceness')} ? 'is-invalid'">
+                    <div class="error" th:if="${#fields.hasErrors('niceness')}" th:errors="*{niceness}">Niceness error</div>
+                </div>
+
+                <div class="field">
+                    <label for="knowledgeableScore">Knowledgeable (1–10)</label>
+                    <input type="number" id="knowledgeableScore" min="1" max="10" th:field="*{knowledgeableScore}"
+                           th:classappend="${#fields.hasErrors('knowledgeableScore')} ? 'is-invalid'">
+                    <div class="error" th:if="${#fields.hasErrors('knowledgeableScore')}" th:errors="*{knowledgeableScore}">Score error</div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="comment">Comment (optional)</label>
+                <textarea id="comment" th:field="*{comment}"
+                          th:classappend="${#fields.hasErrors('comment')} ? 'is-invalid'"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Comment error</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-secondary" th:href="@{/}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

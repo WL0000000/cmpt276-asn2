@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something went wrong</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+        <h1><a th:href="@{/}">Staff Ratings</a></h1>
+    </header>
+
+    <div class="card empty-state">
+        <h2 th:text="${status} ?: 'Error'">Error</h2>
+        <p th:text="${error} ?: 'Something went wrong.'">Something went wrong.</p>
+        <p th:if="${message}" th:text="${message}"></p>
+        <a class="btn btn-primary" th:href="@{/}">Back to list</a>
+    </div>
+</div>
+</body>
+</html>
