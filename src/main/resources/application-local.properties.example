@@ -4,6 +4,6 @@
 # Run locally: mvn spring-boot:run
 # (the local profile is enabled automatically via pom.xml)
 
-DATABASE_URL=jdbc:postgresql://localhost:5432/staffratings
-DB_USERNAME=postgres
-DB_PASSWORD=yourpassword
+spring.datasource.url=jdbc:postgresql://localhost:5432/staffratings
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
