@@ -132,3 +132,6 @@ Render builds and starts the service automatically on each push to the deployed 
 
 ## AI usage declaration
 
+- Used Claude To help create tests, debug code, and create boilerplate and initial idea to get me get started
+- Used Cursor to promote good css and html and refactored code quality to ensure correctness. Also did scans for errors and helped me fix them.
+
