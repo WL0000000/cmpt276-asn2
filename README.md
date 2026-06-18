@@ -116,10 +116,19 @@ Render builds and starts the service automatically on each push to the deployed 
 
 ---
 
+## Known issues / limitations
+
+- **No authentication or authorization.** All create/edit/delete actions are public —
+  anyone with the URL can modify any rating. Intentional for this iteration.
+- **No per-instructor aggregation.** Each row is an independent rating; the app does not
+  average multiple ratings for the same person or rank staff by score yet.
+- **One rating per email.** The unique-email constraint means a given staff member can
+  only be rated once. Submitting a duplicate email shows a friendly form error (no crash),
+  but there's no way to record multiple ratings for the same person.
+- **Free Render tier cold starts.** The deployed instance spins down when idle, so the
+  first request after inactivity can take ~30–60s to respond while it wakes up.
+- **No pagination or search.** The index page lists every rating; this is fine at small
+  scale but would need paging for large datasets.
+
 ## AI usage declaration
 
-<!-- TODO: Fill in your AI-usage declaration here.
-     Describe which AI tools you used, for what parts of the project, and how you
-     reviewed/verified the output. -->
-
-_To be completed by the author._

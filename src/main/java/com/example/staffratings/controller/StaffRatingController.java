@@ -53,8 +53,7 @@ public class StaffRatingController {
 
     @GetMapping("/staff/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        StaffRating rating = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid staff rating id: " + id));
+        StaffRating rating = findOrThrow(id);
         model.addAttribute("staffRating", rating);
         model.addAttribute("displayTitle", StaffMemberProfileFactory.from(rating).displayTitle());
         return "detail";
@@ -62,8 +61,7 @@ public class StaffRatingController {
 
     @GetMapping("/staff/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        StaffRating rating = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid staff rating id: " + id));
+        StaffRating rating = findOrThrow(id);
         model.addAttribute("staffRating", rating);
         model.addAttribute("roleTypes", RoleType.values());
         return "edit";
@@ -92,5 +90,10 @@ public class StaffRatingController {
     public String delete(@PathVariable Long id) {
         repository.deleteById(id);
         return "redirect:/";
+    }
+
+    private StaffRating findOrThrow(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new StaffRatingNotFoundException(id));
     }
 }

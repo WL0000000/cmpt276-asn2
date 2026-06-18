@@ -78,6 +78,14 @@ class StaffRatingControllerTest {
     }
 
     @Test
+    void detailWithUnknownIdReturnsNotFound() throws Exception {
+        when(repository.findById(999L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/staff/999"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void createWithValidDataRedirectsToList() throws Exception {
         when(repository.save(any(StaffRating.class))).thenReturn(sampleRating(1L));
 
